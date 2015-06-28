@@ -6,7 +6,6 @@ namespace Purge;
 
 
 use PHPHtmlParser\Dom;
-use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\CSSList\Document;
 
 
@@ -14,10 +13,19 @@ use Sabberworm\CSS\CSSList\Document;
 class Purge {
 
 
-
+    /**
+     * @var $css
+     *      A CSS Document object
+     */ 
     private $css;
     
+    
+    /**
+     * @var $dom
+     *      An HTML Dom object
+     */ 
     private $dom;
+
 
 
     public function __construct(Document $css, Dom $dom) {
@@ -27,13 +35,7 @@ class Purge {
     }
     
     
-    public function run() {
         
-        $this->parse();
-    }
-    
-    
-    
     /**
      * Compares the CSS selectors against those found in the DOM object
      * 
@@ -57,6 +59,16 @@ class Purge {
     }
     
     
+    /**
+     * Filter out any used CSS on a selector by selector basis
+     * 
+     * @param $block
+     *      A Sabberworm\CSS\RuleSet\DeclarationBlock object
+     * 
+     * @return mixed
+     *      Return the DeclarationBlock if no usage is found
+     *      otherwise, return null
+     */ 
     public function filter($block) {
         
         $usage = 0;
@@ -76,9 +88,14 @@ class Purge {
     }
     
     
-    
     /**
      * Perform any preprocessing to the selector before it is filtered. 
+     * 
+     * @param $selector
+     *      A string representation of a css selector
+     * 
+     * @return string
+     *      A processed selector string
      */ 
     public function preprocess($selector) {
 

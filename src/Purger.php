@@ -44,18 +44,18 @@ class Purger {
      */ 
     public function parse() {
         
-        $css = [];
+        $unusedCSS = [];
         
         foreach ($this->css->getAllDeclarationBlocks() as $block) {
             
-            $unusedCSS = $this->filter($block);
+            $unusedBlock = $this->filter($block);
             
-            if ($unusedCSS != null) {
-                $css[] = $unusedCSS;
+            if ($unusedBlock != null) {
+                $unusedCSS[] = $unusedBlock;
             }
         }
         
-        return $css;
+        return $unusedCSS;
     }
     
     
@@ -63,7 +63,7 @@ class Purger {
      * Filter out any used CSS on a selector by selector basis
      * 
      * @param $block
-     *      A Sabberworm\CSS\RuleSet\DeclarationBlock object
+     *      A DeclarationBlock object
      * 
      * @return mixed
      *      Return the DeclarationBlock if no usage is found

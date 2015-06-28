@@ -1,7 +1,8 @@
 {
 	"require" : {
 		"paquettg/php-html-parser" : "1.6.*",
-		"sabberworm/php-css-parser" : "*"
+		"sabberworm/php-css-parser" : "*",
+		"symfony/console": "^2.7"
 	},
     "autoload": {
         "psr-4": {

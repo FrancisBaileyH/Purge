@@ -3,7 +3,7 @@
 
 
 
-use Purge\Purge;
+use Purge\Purger;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\Ruleset\DeclarationBlock;
@@ -23,7 +23,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         $dom = new Dom();
       
         
-        $purge = new Purge($document->parse(), $dom->load($html));
+        $purge = new Purger($document->parse(), $dom->load($html));
         
         $purgedCSS = $purge->parse();
         
@@ -48,7 +48,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         $dom = new Dom();
       
         
-        $purge = new Purge($document->parse(), $dom->load($html));
+        $purge = new Purger($document->parse(), $dom->load($html));
         
         $purgedCSS = $purge->parse();
         
@@ -67,7 +67,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         $dom = new Dom();
       
         
-        $purge = new Purge($document->parse(), $dom->load($html));
+        $purge = new Purger($document->parse(), $dom->load($html));
         
         $purgedCSS = $purge->parse();
         

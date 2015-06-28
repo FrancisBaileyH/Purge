@@ -10,7 +10,7 @@ use Sabberworm\CSS\CSSList\Document;
 
 
 
-class Purge {
+class Purger {
 
 
     /**

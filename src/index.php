@@ -4,7 +4,7 @@ include "../vendor/autoload.php";
 
 use PHPHtmlParser\Dom;
 use Sabberworm\CSS\Parser;
-use Purge\Purge;
+use Purge\Purger;
 
 
 $dom = new Dom();
@@ -16,7 +16,7 @@ $dom->load('http://francisbailey.com');
 
 
 
-$purge = new Purge($parsedCss, $dom);
+$purge = new Purger($parsedCss, $dom);
 
 
 $unusedCSS = $purge->parse();

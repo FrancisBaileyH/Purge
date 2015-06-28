@@ -1,10 +1,10 @@
 <?php
 
-include "vendor/autoload.php";
+include "../vendor/autoload.php";
 
 use PHPHtmlParser\Dom;
 use Sabberworm\CSS\Parser;
-use FrancisBaileyH\Purge;
+use Purge\Purge;
 
 
 $dom = new Dom();
@@ -16,31 +16,20 @@ $dom->load('http://francisbailey.com');
 
 
 
-$purge = new Purge($css, $dom);
+$purge = new Purge($parsedCss, $dom);
 
 
 $unusedCSS = $purge->parse();
 
-var_dump($unusedCSS);
 
 
 echo "<pre>";
 
 
-foreach ($parsedCss->getAllDeclarationBlocks() as $block) {
+foreach ($unusedCSS as $block) {
     
-    foreach ($block->getSelector() as $selector) {
-        
-        $strSelector = $selector->sSelector;
-        
-        if (count($dom->find($strSelector)) > 0) {
-            echo "HTML Usage found for: {$strSelector}\n";
-        } 
-        else {
-            echo "HTML Usage not found for: {$strSelector}\n";
-        }
-        
-    }
+    echo $block . "\n";
 }
+
 
 echo "</pre>";

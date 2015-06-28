@@ -1,10 +1,14 @@
 <?php
 
-include '../vendor/autoload.php';
+
+
+include '../src/Purge.php';
 
 
 
-use FrancisBaileyH\Purge;
+
+
+use Purge\Purge;
 
 
 class PurgeTest extends PHPUnit_Framework_TestCase {
@@ -15,7 +19,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         $html = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
         $css = ".test { position: absolute; } .unused { position: relative; }";
         
-        $purge = new \Purge($css, [ $html ]);
+        $purge = new Purge($css, [ $html ]);
         
         $purgedCSS = $purge->purge();
              

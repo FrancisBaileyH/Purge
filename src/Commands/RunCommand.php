@@ -5,10 +5,11 @@
 
 namespace Purge\Commands;
 
-use Purge\Controllers\AppController;
+
 use PHPHtmlParser\Dom;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Settings;
+use Purge\Controllers\AppController;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -80,8 +81,8 @@ class RunCommand extends Command {
         
 
         
-        $purgeController = new AppController($document, $dom, $output);
-        $purgeController->run();
+        $app = new AppController($document, $dom, $output);
+        $app->run();
     }
     
     

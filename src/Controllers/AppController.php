@@ -24,7 +24,7 @@ class AppController {
     
     
     
-    public function __construct(Document $css, Dom $dom, OutputInterface $output) {
+    public function __construct(Document $css, array $html, OutputInterface $output) {
         
         $this->css= $css;
         $this->dom = $dom;
@@ -32,7 +32,9 @@ class AppController {
     }
     
     
-    
+    /**
+     * Start up the PurgeManager and output the summary
+     */ 
     public function run() {
         
         $purge = new Purger($this->css, $this->dom);
@@ -41,12 +43,25 @@ class AppController {
         
         $this->output->writeln(' [<info>OK</info>]');
         $this->output->writeln('');
+        
+        return $this->outputSummary($purgedCSS);
+    }
+    
+      
+    /*
+     * Write the summary to the console
+     * 
+     * @param array $purgedCSS
+     *      An array of DeclartionBlocks
+     */
+    public function outputSummary($purgedCSS) {
+        
         $this->output->writeln('<options=bold>Summary of Unused CSS</options=bold>');
         $this->output->writeln('-----------------------------------------------');
         
         foreach ($purgedCSS as $purgedBlock) {
             $this->output->writeln($purgedBlock->__toString());    
-        }
+        }        
     }
     
 }

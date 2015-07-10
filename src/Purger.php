@@ -62,7 +62,7 @@ class Purger {
      * Filter out any used CSS on a selector by selector basis
      * 
      * @param DeclarationBlock $block
-     *      A DeclarationBlock object
+     *      The css block to check against existence in the dom
      * 
      * @return mixed
      *      Return the DeclarationBlock if no usage is found
@@ -119,14 +119,22 @@ class Purger {
 		
 		return md5(serialize($block));
 	}
+	
+	
+	/**
+	 * Getter for unusedCssStorage
+	 * 
+	 * @return
+	 * 		unusedCssStorage hash table
+	 */ 
+	public function getStoredCss() {
+		
+		return $this->unusedCssStorage;
+	}
     
         
     /**
      * Perform any preprocessing to the selector before it is filtered. 
-     * 
-     * @TODO
-     * - remove multiple instances of psuedo classes ( li:first-child > a:hover > span:first-child )
-     * 
      * 
      * @param string $selector
      *      A string representation of a css selectorf
@@ -142,7 +150,6 @@ class Purger {
         else {
             $processedSelector = $selector;
         }
-        echo $processedSelector . '\n';
                
         return $processedSelector;
     }

@@ -5,7 +5,6 @@
 namespace Purge\Controllers;
 
 
-
 use Purge\Purger;
 use Purge\Factory\DomFactory;
 use PHPHtmlParser\Dom;
@@ -14,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 
 
-class PurgeContoller {
+class PurgeController {
 
 
 
@@ -38,14 +37,30 @@ class PurgeContoller {
 
 	public function startPurge(array $html) {
 		
+		$i = 1;
+		$total = count($html);
+		
 		foreach ($html as $value) {
-			
-			
+			$this->output->write("Loading HTML file ($i/$total)");
 			$dom = DomFactory::buildDom($value);
+			$this->output->writeln(" [<info>OK</info>]");
 			
-			$unusedCSS = $this->purger->purge($dom);
-		}	
+			$this->output->write("Purging CSS from HTML file ($i/$total)");
+			$this->purger->purge($dom);
+			$this->output->writeln(" [<info>OK</info>]");
+			
+			$i++;
+		}
+		
+		$this->output->writeln("Purge Successfully Completed!\n");
 	}
+	
+	
+	public function getPurgeResults() {
+		
+		return $this->purger->getStoredCss();
+	}
+		
 	
 
 }

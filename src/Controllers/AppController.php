@@ -1,10 +1,10 @@
 <?php
 
 
+
 namespace Purge\Controllers;
 
 
-use Purge\Purger;
 use PHPHtmlParser\Dom;
 use Sabberworm\CSS\CSSList\Document;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +17,7 @@ class AppController {
     private $css;
     
     
-    private $dom;
+    private $html;
     
     
     private $output;
@@ -27,7 +27,7 @@ class AppController {
     public function __construct(Document $css, array $html, OutputInterface $output) {
         
         $this->css= $css;
-        $this->dom = $dom;
+        $this->html = $html;
         $this->output = $output;
     }
     
@@ -36,15 +36,17 @@ class AppController {
      * Start up the PurgeManager and output the summary
      */ 
     public function run() {
+		
+		try {
+			$purgeManager = new PurgeController($this->css, $this->output);
+			$purgeManager->startPurge($this->html);
+		} 
+		catch ( \Exception $e ) {
+			
+			$this->output->writeln("[<fg=red>Error</fg=red>] {$e->getMessage()} \n");
+		}
         
-        $purge = new Purger($this->css, $this->dom);
-        
-        $purgedCSS = $purge->parse();
-        
-        $this->output->writeln(' [<info>OK</info>]');
-        $this->output->writeln('');
-        
-        return $this->outputSummary($purgedCSS);
+        return $this->outputSummary($purgeManager->getPurgeResults());
     }
     
       
@@ -52,7 +54,7 @@ class AppController {
      * Write the summary to the console
      * 
      * @param array $purgedCSS
-     *      An array of DeclartionBlocks
+     *      An array of DeclarationBlocks
      */
     public function outputSummary($purgedCSS) {
         
@@ -61,7 +63,9 @@ class AppController {
         
         foreach ($purgedCSS as $purgedBlock) {
             $this->output->writeln($purgedBlock->__toString());    
-        }        
+        }   
+        
+        $this->output->writeln('');     
     }
     
 }

@@ -2,7 +2,6 @@
 
 
 
-
 use Purge\Purger;
 use PHPHtmlParser\Dom;
 use Sabberworm\CSS\Parser;
@@ -12,6 +11,7 @@ use Sabberworm\CSS\Ruleset\DeclarationBlock;
 
 
 class PurgeTest extends PHPUnit_Framework_TestCase {
+	
 
 
     public function testFilterSelector() {
@@ -89,4 +89,36 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         
         $this->assertEquals($output, $expected);
     }
+    
+    
+    public function testUsedCssRemoved() {
+		
+		$htmlA = "<div>Text Here</div>";
+		$htmlB = "<div class='test'><p class='text-center'>Text Here</p></div>";
+        $css = ".test { position: absolute; }";
+        
+        
+        $domA 	  = new Dom();
+        $domB 	  = new Dom();
+        $document = new Parser($css);
+        $purge    = new Purger($document->parse());
+        
+        
+        $purgedCss = $purge->purge($domA->load($htmlA));
+        
+        $this->assertNotEmpty($purgedCss);
+        
+        $purgedCss = $purge->purge($domB->load($htmlB));
+        
+        $this->assertEmpty($purgedCss);
+        
+        $purgedCss = $purge->purge($domA->load($htmlA));
+        
+        $this->assertEmpty($purgedCss);
+		
+	}
+    
+    
+    
+    
 }

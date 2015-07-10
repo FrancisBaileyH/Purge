@@ -2,7 +2,6 @@
 
 
 
-
 namespace Purge\Commands;
 
 
@@ -52,33 +51,34 @@ class RunCommand extends Command {
         
         $mbSupport = true;
         
-        $css = file_get_contents($input->getArgument('css'));
-        
-       
+        $output->writeln('');
         $output->write('Reading in CSS');
         
+        $css = file_get_contents($input->getArgument('css'));
+               
        
         if ($input->getOption('fast')) {
             $mbSupport = false;
         }
         
-        $output->writeln(' [<info>OK</info>]');
-
-        $output->write('Reading in HTML');
-
-        $dom = new Dom();
-        $dom->load(file_get_contents($input->getArgument('html')));
-        
-        $output->writeln(' [<info>OK</info>]');
-        
         $parser = new Parser($css, Settings::create()->withMultibyteSupport($mbSupport));
         
-        $output->write('Parsing CSS Document');
+        
+        $dom = [ "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+        "http://www.francisbailey.com",
+				 "http://reddit.com" ];
+        
         $document = $parser->parse();
-        $output->writeln(' [<info>OK</info>]');
         
-        $output->write('Purging CSS Document');
-        
+        $output->writeln(' [<info>OK</info>]');   
 
         
         $app = new AppController($document, $dom, $output);

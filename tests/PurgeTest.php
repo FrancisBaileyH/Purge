@@ -29,9 +29,8 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
 	 */ 
     public function testFilterSelector() {
                
-        $html = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
-        $css  = ".test { position: absolute; } .unused { }";
-        
+        $html     = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
+        $css      = ".test { position: absolute; } .unused { }";
         $document = new Parser($css);
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));
         $block    = new DeclarationBlock();
@@ -51,16 +50,12 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
      */ 
     public function testFilterChildSelector() {
         
-        $html = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
-        $css  = ".test > .all > p { position: absolute; }";
-        
-        
+        $html     = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
+        $css      = ".test > .all > p { position: absolute; }";
         $document = new Parser($css);
-        
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));
         
         $purge->purge($this->dom->load($html));
-        
 
         $this->assertEmpty($purge->getPurgedCss());
     }
@@ -72,12 +67,11 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
      */
     public function testFilterPseudoClass() {
         
-        $html = "<ul class='nav'><li><a class='text-center'>Text Here</a></li></ul>";
-        $css  = ".nav > li > a:hover { position: absolute; }";
-        
+        $html     = "<ul class='nav'><li><a class='text-center'>Text Here</a></li></ul>";
+        $css      = ".nav > li > a:hover { position: absolute; }";
         $document = new Parser($css);
-      
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));      
+        
         $purge->purge($this->dom->load($html));
         
         $this->assertEmpty($purge->getPurgedCss());
@@ -92,10 +86,8 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
     public function testPreprocess() {
         
         $document = new Parser('');
-        
-        $purge = new Purger(BlockHashTableFactory::build($document->parse()));
-       
-        $css = 'ul:last-child > li:first-child > p:hover > a'; 
+        $purge    = new Purger(BlockHashTableFactory::build($document->parse()));
+        $css      = 'ul:last-child > li:first-child > p:hover > a'; 
         $expected = 'ul > li > p > a';
         
         $output = $purge->preprocess($css);

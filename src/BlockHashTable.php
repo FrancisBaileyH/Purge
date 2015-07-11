@@ -61,7 +61,7 @@ class BlockHashTable {
 	 * 		A css declaration block 
 	 * 
 	 * @return string
-	 * 		An md5 hash representing the a Declaration Block
+	 * 		An md5 hash representing the DeclarationBlock object
 	 */
 	public function hashBlock(DeclarationBlock $block) {
 		return md5(serialize($block));

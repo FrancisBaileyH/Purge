@@ -39,14 +39,25 @@ class AppController {
 		try {
 			$purgeManager = new PurgeController($this->css, $this->output);
 			$purgeManager->startPurge($this->html);
+			
+			$this->outputSummary($purgeManager->getPurgeResults());
 		} 
 		catch ( \Exception $e ) {
-			
+			$this->output->writeln('');
 			$this->output->writeln("[<fg=red>Error</fg=red>] {$e->getMessage()} \n");
 		}
-        
-        return $this->outputSummary($purgeManager->getPurgeResults());
     }
+    
+    
+    
+    public function handleArgs(InputInterface $input) {
+		
+		
+		
+		
+		
+	}
+    
     
       
     /*

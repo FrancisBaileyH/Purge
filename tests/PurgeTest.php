@@ -22,9 +22,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		
 		$this->html = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
-		
-		$this->dom = new PurgeHtmlCrawler($this->html);
-		
+		$this->dom  = new PurgeHtmlCrawler($this->html);
 	}
 	
 
@@ -106,7 +104,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
 		
 		$htmlA = "<div>Text Here</div>";
 		$htmlB = "<div class='test'><p class='text-center'>Text Here</p></div>";
-        $css = ".test { position: absolute; }";
+        $css   = ".test { position: absolute; }";
         
        
         $document = new Parser($css);

@@ -5,7 +5,6 @@
 namespace Purge\Commands;
 
 
-use PHPHtmlParser\Dom;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Settings;
 use Purge\Controllers\AppController;
@@ -25,32 +24,37 @@ class RunCommand extends Command {
         
         $this
             ->setName('purge:run')
-            ->setDescription('Run CSS purger')
+            ->setDescription('Purge unused css from specified css files')
             ->addArgument(
                 'css',
                 InputArgument::REQUIRED,
-                'Specify the css file to clean'
+                'Specify a css file to purge'
             )
             ->addOption(
-                'fast',
+                'mb-support',
                 null,
                 InputOption::VALUE_NONE,
-                'If set, multibyte functions will be disabled in the CSS parser '
-                .'allowing for faster parsing. This may lead to errors depending'
-                .' on the character encoding of the document'
+                'If set, multibyte functions will be enabled in the CSS parser '
+                .'this typically causes slower parse times and is disabled by default'
             )
             ->addArgument(
                 'html',
-                InputArgument::OPTIONAL,
+                InputArgument::REQUIRED,
                 'Specify an html file to check against'
-            );
+            )
+            ->addOption(
+				'sitemap',
+				null,
+				InputOption::VALUE_NONE,
+				'If set, Purge will read in a sitemap file and run against the links found within it'
+			);
     }
     
     
     
     protected function execute(InputInterface $input, OutputInterface $output) {
         
-        $mbSupport = true;
+        $mbSupport = false;
         
         $output->writeln('');
         $output->write('Reading in CSS');
@@ -58,21 +62,21 @@ class RunCommand extends Command {
         $css = file_get_contents($input->getArgument('css'));
                
        
-        if ($input->getOption('fast')) {
-            $mbSupport = false;
+        if ($input->getOption('mb-support')) {
+            $mbSupport = true;
         }
         
         $parser = new Parser($css, Settings::create()->withMultibyteSupport($mbSupport));
         
         
-        $dom = [ "http://www.reddit.com" ];
+        $html = [ $input->getArgument('html') ];
         
         $document = $parser->parse();
         
         $output->writeln(' [<info>OK</info>]');   
 
         
-        $app = new AppController($document, $dom, $output);
+        $app = new AppController($document, $html, $output);
         $app->run();
     }
     

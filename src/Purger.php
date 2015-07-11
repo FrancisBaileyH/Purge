@@ -29,10 +29,10 @@ class Purger {
     
         
     /**
-     * Compares the CSS selectors against those found in the DOM object
+     * Compares the CSS selectors against those found in the Crawler object
      * 
-     * @param Dom $dom
-     * 		A pre-parsed html dom object
+     * @param PurgeHtmlCrawler $dom
+     * 		A preloaded Crawler object
      */ 
     public function purge(PurgeHtmlCrawler $dom) {
         
@@ -104,7 +104,7 @@ class Purger {
     
           
     /**
-     * Perform any preprocessing to the selector before it is filtered. 
+     * Strip any pseudo classes out of the selector 
      * 
      * @param string $selector
      *      A string representation of a css selectorf

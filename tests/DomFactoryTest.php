@@ -20,7 +20,7 @@ class DomFactoryTest extends PHPUnit_Framework_TestCase {
 
 		try {
 		
-			$dom = DomFactory::buildDom('foo');
+			$dom = DomFactory::build('foo');
 			
 			$this->fail();
 		}

@@ -47,6 +47,7 @@ class RunCommand extends Command {
     }
     
     
+    
     protected function execute(InputInterface $input, OutputInterface $output) {
         
         $mbSupport = true;

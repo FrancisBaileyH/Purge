@@ -15,48 +15,65 @@ class Purger {
 
 
     /**
-     * @var $css
-     *      A CSS Document object
+     * @var $cssBlocks
+     *      A hash table of css DeclarationBlock objects
      */ 
-    private $css;
-    
-    
-    /**
-     * @var $unusedCssStorage
-     * 		A hash table of unused css DeclartionBlock objects
-     */ 
-    private $unusedCssStorage = [];
-    
+    private $cssBlocks;
+      
     
 
-    public function __construct(Document $css) {
+    public function __construct(BlockHashTable $hashTable) {
         
-        $this->css = $css;
+        $this->cssBlocks = $hashTable;
     }
+    
     
         
     /**
      * Compares the CSS selectors against those found in the DOM object
      * 
-     * @return array
-     *      An array of unused CSS selector objects
+     * @param Dom $dom
+     * 		A pre-parsed html dom object
      */ 
     public function purge(Dom $dom) {
         
         
-        foreach ($this->css->getAllDeclarationBlocks() as $block) {
+        foreach ($this->cssBlocks->getBlockCollection() as $block) {
+			
+			$decBlock = $block[BlockHashTable::BLOCK_VALUE];
             
-            $unusedBlock = $this->filter($block, $dom);
+            $unusedBlock = $this->filter($decBlock, $dom);
             
-            if ($unusedBlock != null) {
-				$hash = $this->hashDeclarationBlock($unusedBlock);
-                $this->unusedCssStorage[$hash] = $unusedBlock;
+            if ($unusedBlock == null) {
+				$hash = $this->cssBlocks->hashBlock($decBlock);
+				$this->cssBlocks->setUsedFlag($hash, true);
             }
         }
-        
-        return $this->unusedCssStorage;
     }
     
+    
+    
+    /**
+     * Get all unused css from the cssBlocks hashtable
+     * 
+     * @return
+     * 		An array of DeclarationBlock objects
+     */ 
+    public function getPurgedCss() {
+		
+		$unusedCss = [];
+		
+		foreach ($this->cssBlocks->getBlockCollection() as $block) {
+			
+			if (!$block[BlockHashTable::IS_USED]) {
+				$unusedCss[] = $block[BlockHashTable::BLOCK_VALUE];
+			}
+		}
+		
+		return $unusedCss;
+	}
+    
+       
     
     /**
      * Filter out any used CSS on a selector by selector basis
@@ -79,8 +96,6 @@ class Purger {
             $usage = $dom->find($processedSelector);
 
             if (count($usage) > 0) {
-				
-				$this->removeUsedCss($block);
                 return null;
             }
         }
@@ -89,50 +104,7 @@ class Purger {
     }
     
     
-    /**
-     * Check to see if the declaration block exists in storage already
-     * if it does, remove it
-     * 
-     * @param DeclarationBlcok $block
-     * 		A css block
-     */
-    public function removeUsedCss(DeclarationBlock $block) {
-		
-		$hash = $this->hashDeclarationBlock($block);
-		
-		if (isset($this->unusedCssStorage[$hash])) {
-			unset($this->unusedCssStorage[$hash]);
-		}
-	}
-	
-	
-	/**
-	 * Hash the contents of the declaration block 
-	 * 
-	 * @param DeclarationBlock $block
-	 * 		A css block 
-	 * 
-	 * @return
-	 * 		An md5 representation of the css block
-	 */ 
-	public function hashDeclarationBlock(DeclarationBlock $block) {
-		
-		return md5(serialize($block));
-	}
-	
-	
-	/**
-	 * Getter for unusedCssStorage
-	 * 
-	 * @return
-	 * 		unusedCssStorage hash table
-	 */ 
-	public function getStoredCss() {
-		
-		return $this->unusedCssStorage;
-	}
-    
-        
+          
     /**
      * Perform any preprocessing to the selector before it is filtered. 
      * 

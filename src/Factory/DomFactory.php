@@ -9,7 +9,7 @@ use PHPHtmlParser\Dom;
 use Purge\Exceptions\UnableToReadInFileException;
 
 
-class DomFactory {
+class DomFactory extends Factory {
 
 
 	/**
@@ -21,7 +21,7 @@ class DomFactory {
 	 * @return
 	 * 		A Dom object with the HTML parsed
 	 */ 
-    public static function buildDom($file) {
+    public static function build($file) {
         
         $dom = new Dom();
         

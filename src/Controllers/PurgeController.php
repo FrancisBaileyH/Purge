@@ -6,9 +6,8 @@ namespace Purge\Controllers;
 
 
 use Purge\Purger;
-use Purge\BlockHashTable;
 use Purge\Factory\DomFactory;
-use PHPHtmlParser\Dom;
+use Purge\Factory\BlockHashTableFactory;
 use Sabberworm\CSS\CSSList\Document;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -33,7 +32,7 @@ class PurgeController {
 		
 		$this->output = $output;
 		
-		$this->purger = new Purger(new BlockHashTable($css));
+		$this->purger = new Purger(BlockHashTableFactory::build($css));
 	}
 	
 
@@ -63,7 +62,7 @@ class PurgeController {
 	
 	public function getPurgeResults() {
 		
-		return $this->purger->getStoredCss();
+		return $this->purger->getPurgedCss();
 	}
 		
 	

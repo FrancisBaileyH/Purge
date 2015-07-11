@@ -3,8 +3,8 @@
 
 
 use Purge\Purger;
+use Purge\PurgeHtmlCrawler;
 use Purge\Factory\BlockHashTableFactory;
-use PHPHtmlParser\Dom;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\Ruleset\DeclarationBlock;
@@ -15,11 +15,15 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
 	
 	
 	protected $dom;
+	protected $html;
+	
 		
 	
 	protected function setUp() {
 		
-		$this->dom = new Dom();
+		$this->html = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
+		
+		$this->dom = new PurgeHtmlCrawler($this->html);
 		
 	}
 	
@@ -29,7 +33,6 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
 	 */ 
     public function testFilterSelector() {
                
-        $html     = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
         $css      = ".test { position: absolute; } .unused { }";
         $document = new Parser($css);
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));
@@ -37,7 +40,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         $block->setSelector('.unused');
            
         
-        $purge->purge($this->dom->load($html));             
+        $purge->purge($this->dom);             
        
 		$this->assertNotNull($purge->getPurgedCss());
     }
@@ -50,12 +53,11 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
      */ 
     public function testFilterChildSelector() {
         
-        $html     = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
         $css      = ".test > .all > p { position: absolute; }";
         $document = new Parser($css);
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));
         
-        $purge->purge($this->dom->load($html));
+        $purge->purge($this->dom);
 
         $this->assertEmpty($purge->getPurgedCss());
     }
@@ -66,13 +68,12 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
      * Test that a selector with pseudo classes is still found to be used
      */
     public function testFilterPseudoClass() {
-        
-        $html     = "<ul class='nav'><li><a class='text-center'>Text Here</a></li></ul>";
-        $css      = ".nav > li > a:hover { position: absolute; }";
+
+        $css      = ".test > .all:hover > p { position: absolute; }";
         $document = new Parser($css);
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));      
         
-        $purge->purge($this->dom->load($html));
+        $purge->purge($this->dom);
         
         $this->assertEmpty($purge->getPurgedCss());
     }
@@ -111,18 +112,20 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         $document = new Parser($css);
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));
         
+        $domA = new PurgeHtmlCrawler($htmlA);
+        $domB = new PurgeHtmlCrawler($htmlB);
         
-        $purge->purge($this->dom->load($htmlA));
+        $purge->purge($domA);
         $purgedCss = $purge->getPurgedCss();
         
         $this->assertNotNull($purgedCss);
         
-        $purge->purge($this->dom->load($htmlB));
+        $purge->purge($domB);
         $purgedCss = $purge->getPurgedCss();
         
         $this->assertEmpty($purgedCss);
         
-        $purge->purge($this->dom->load($htmlA));
+        $purge->purge($domA);
         $purgedCss = $purge->getPurgedCss();
         
         $this->assertEmpty($purgedCss);

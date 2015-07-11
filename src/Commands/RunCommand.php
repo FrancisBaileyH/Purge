@@ -65,17 +65,7 @@ class RunCommand extends Command {
         $parser = new Parser($css, Settings::create()->withMultibyteSupport($mbSupport));
         
         
-        $dom = [ "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-        "http://www.francisbailey.com",
-				 "http://reddit.com" ];
+        $dom = [ "http://www.reddit.com" ];
         
         $document = $parser->parse();
         

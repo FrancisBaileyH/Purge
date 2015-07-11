@@ -5,7 +5,7 @@
 namespace Purge\Factory;
 
 
-use PHPHtmlParser\Dom;
+use Purge\PurgeHtmlCrawler;
 use Purge\Exceptions\UnableToReadInFileException;
 
 
@@ -23,15 +23,16 @@ class DomFactory extends Factory {
 	 */ 
     public static function build($file) {
         
-        $dom = new Dom();
-        
+               
         $html = @file_get_contents($file);
         
         if (!$html) {
             throw new UnableToReadInFileException('Unable to load file: ' . urldecode($file));
         }
         
-        return $dom->load($html);
+        $dom = new PurgeHtmlCrawler($html);
+        
+        return $dom;
     }
 
 }

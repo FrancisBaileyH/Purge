@@ -5,7 +5,6 @@
 namespace Purge;
 
 
-use PHPHtmlParser\Dom;
 use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\RuleSet\DeclarationBlock;
 
@@ -35,8 +34,7 @@ class Purger {
      * @param Dom $dom
      * 		A pre-parsed html dom object
      */ 
-    public function purge(Dom $dom) {
-        
+    public function purge(PurgeHtmlCrawler $dom) {
         
         foreach ($this->cssBlocks->getBlockCollection() as $block) {
 			
@@ -85,7 +83,7 @@ class Purger {
      *      Return the DeclarationBlock if no usage is found
      *      otherwise, return null
      */ 
-    public function filter(DeclarationBlock $block, Dom $dom) {
+    public function filter(DeclarationBlock $block, PurgeHtmlCrawler $dom) {
         
         $usage = 0;
         
@@ -93,7 +91,7 @@ class Purger {
             
             $processedSelector = $this->preprocess($selector->sSelector);
             
-            $usage = $dom->find($processedSelector);
+            $usage = $dom->findFirstInstance($processedSelector);
 
             if (count($usage) > 0) {
                 return null;

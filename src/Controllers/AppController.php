@@ -5,7 +5,6 @@
 namespace Purge\Controllers;
 
 
-use PHPHtmlParser\Dom;
 use Sabberworm\CSS\CSSList\Document;
 use Symfony\Component\Console\Output\OutputInterface;
 

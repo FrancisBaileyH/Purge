@@ -17,7 +17,6 @@ class CssDocumentFactory extends FileFactory {
 	 * Build a CSS Document object from a file 
 	 * 
 	 * @param string $file
-	 * 		The file or url to load the css from
 	 * 
 	 * @param bool $mbSupport
 	 * 		Turn multi byte support on or off 

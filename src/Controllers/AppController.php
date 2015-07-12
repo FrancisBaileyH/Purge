@@ -5,6 +5,7 @@
 namespace Katten\Purge\Controllers;
 
 
+use Sabberworm\CSS\OutputFormat;
 use Katten\Purge\Factory\CssDocumentFactory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -53,6 +54,8 @@ class AppController {
 			$this->output->writeln("<error> {$type} </error>");
 			$this->output->writeln("<error> {$e->getMessage()} </error> \n");
 		}
+		
+		$this->output->writeln(''); 
     }
     
     
@@ -82,21 +85,31 @@ class AppController {
     
       
     /*
-     * Write the summary to the console
+     * Write the summary to the specified file, function will change
+     * simply here to get basic functionality. 
      * 
      * @param array $purgedCSS
      *      An array of DeclarationBlocks
      */
     public function outputSummary($purgedCSS) {
         
-        $this->output->writeln('<options=bold>Summary of Unused CSS</options=bold>');
-        $this->output->writeln('-----------------------------------------------');
+        
+        $file = $this->input->getArgument('output-file');
+        $this->output->write('Outputting results to file');        
+        
+        $output = '';
         
         foreach ($purgedCSS as $purgedBlock) {
-            $this->output->writeln($purgedBlock->__toString());    
-        }   
+            $output .= $purgedBlock->render(OutputFormat::createPretty());    
+        }
         
-        $this->output->writeln('');     
+        $result = @file_put_contents($file, $output);   
+        
+        if (!$result) {
+			throw new \Exception("Error unable to write to file: $file");
+		} 
+		
+		$this->output->writeln(' [<info>OK</info>]');   
     }
     
 }

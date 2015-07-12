@@ -44,7 +44,7 @@ class RunCommand extends Command {
             )
             ->addArgument(
 				'output-file',
-				InputArgument::OPTIONAL,
+				InputArgument::REQUIRED,
 				'Specify a file to write the output to'
 			)
             ->addOption(

@@ -86,7 +86,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         
         $document = new Parser('');
         $purge    = new Purger(BlockHashTableFactory::build($document->parse()));
-        $css      = 'ul:last-child > li:first-child > p:hover > a'; 
+        $css      = 'ul:last-child > li:first-child > p::after > a:not(.test)'; 
         $expected = 'ul > li > p > a';
         
         $output = $purge->preprocess($css);

@@ -5,12 +5,19 @@
 namespace Purge\Controllers;
 
 
-use Sabberworm\CSS\CSSList\Document;
+use Purge\Factory\CssDocumentFactory;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
 class AppController {
     
+    
+    
+    private $input;
+    
+    
+    private $output;
     
     
     private $css;
@@ -19,14 +26,10 @@ class AppController {
     private $html;
     
     
-    private $output;
     
-    
-    
-    public function __construct(Document $css, array $html, OutputInterface $output) {
+    public function __construct(InputInterface $input, OutputInterface $output) {
         
-        $this->css= $css;
-        $this->html = $html;
+        $this->input = $input;
         $this->output = $output;
     }
     
@@ -37,25 +40,44 @@ class AppController {
     public function run() {
 		
 		try {
+			$this->setUp();
+			
 			$purgeManager = new PurgeController($this->css, $this->output);
 			$purgeManager->startPurge($this->html);
 			
 			$this->outputSummary($purgeManager->getPurgeResults());
 		} 
 		catch ( \Exception $e ) {
+			
+			$type = get_class($e);
 			$this->output->writeln('');
-			$this->output->writeln("[<fg=red>Error</fg=red>] {$e->getMessage()} \n");
+			$this->output->writeln("<error> {$type} </error>");
+			$this->output->writeln("<error> {$e->getMessage()} </error> \n");
 		}
     }
     
     
     
-    public function handleArgs(InputInterface $input) {
+    /**
+     * Create the CSS Document object and build the html 
+     * filenames array
+     * 
+     * This function is just here in the interim as refactoring
+     * occurs
+     */ 
+    public function setUp() {
 		
+		$this->output->writeln('');
+        $this->output->write('Reading in CSS');
 		
+		$cssFile   = $this->input->getArgument('css');
+		$mbSupport = $this->input->getOption('mb-support');
 		
+		$this->css = CssDocumentFactory::build($cssFile, $mbSupport);
 		
+		$this->output->writeln(' [<info>OK</info>]'); 
 		
+		$this->html = [ $this->input->getArgument('html') ];
 	}
     
     

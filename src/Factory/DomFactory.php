@@ -9,7 +9,7 @@ use Purge\PurgeHtmlCrawler;
 use Purge\Exceptions\UnableToReadInFileException;
 
 
-class DomFactory extends Factory {
+class DomFactory extends FileFactory {
 
 
 	/**
@@ -23,12 +23,7 @@ class DomFactory extends Factory {
 	 */ 
     public static function build($file) {
         
-               
-        $html = @file_get_contents($file);
-        
-        if (!$html) {
-            throw new UnableToReadInFileException('Unable to load file: ' . urldecode($file));
-        }
+		$html = parent::buildFromFile($file);
         
         $dom = new PurgeHtmlCrawler($html);
         

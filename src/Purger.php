@@ -87,11 +87,20 @@ class Purger {
         
         $usage = 0;
         
-        foreach ($block->getSelector() as $selector) {
+        foreach ($block->getSelectors() as $selector) {
             
-            $processedSelector = $this->preprocess($selector->sSelector);
+            $processedSelector = $this->preprocess($selector->getSelector());
+            
+            try {
             
             $usage = $dom->findFirstInstance($processedSelector);
+            
+		}
+		catch ( \Exception $e) {
+			
+			echo $processedSelector;
+			throw $e;
+		}
 
             if (count($usage) > 0) {
                 return null;

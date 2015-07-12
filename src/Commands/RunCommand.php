@@ -42,6 +42,11 @@ class RunCommand extends Command {
                 InputArgument::REQUIRED,
                 'Specify an html file to check against'
             )
+            ->addArgument(
+				'output-file',
+				InputArgument::OPTIONAL,
+				'Specify a file to write the output to'
+			)
             ->addOption(
 				'sitemap',
 				null,
@@ -54,29 +59,7 @@ class RunCommand extends Command {
     
     protected function execute(InputInterface $input, OutputInterface $output) {
         
-        $mbSupport = false;
-        
-        $output->writeln('');
-        $output->write('Reading in CSS');
-        
-        $css = file_get_contents($input->getArgument('css'));
-               
-       
-        if ($input->getOption('mb-support')) {
-            $mbSupport = true;
-        }
-        
-        $parser = new Parser($css, Settings::create()->withMultibyteSupport($mbSupport));
-        
-        
-        $html = [ $input->getArgument('html') ];
-        
-        $document = $parser->parse();
-        
-        $output->writeln(' [<info>OK</info>]');   
-
-        
-        $app = new AppController($document, $html, $output);
+        $app = new AppController($input, $output);
         $app->run();
     }
     

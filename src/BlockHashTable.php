@@ -34,21 +34,14 @@ class BlockHashTable {
      * a given Document object
      * 
      * @param Document $css
-     * 
-     * @return mixed
-     *      A hash table containing css declartion blocks
-     *      and flags indicating whether they've been used
      */ 
     public function build(Document $css) {
-        
     
         foreach ($css->getAllDeclarationBlocks() as $block) {
             $hash = $this->hashBlock($block);
             
             $this->hashTable[$hash] = [ self::BLOCK_VALUE => $block, self::IS_USED => false ];
         }
-        
-        return $this->hashTable;
     }
     
     

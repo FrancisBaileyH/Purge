@@ -2,7 +2,7 @@
 
 
 
-use Purge\BlockHashTable;
+use Katten\Purge\BlockHashTable;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\Rule\Rule;

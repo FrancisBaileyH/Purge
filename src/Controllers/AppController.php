@@ -2,16 +2,15 @@
 
 
 
-namespace Purge\Controllers;
+namespace Katten\Purge\Controllers;
 
 
-use Purge\Factory\CssDocumentFactory;
+use Katten\Purge\Factory\CssDocumentFactory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
 class AppController {
-    
     
     
     private $input;

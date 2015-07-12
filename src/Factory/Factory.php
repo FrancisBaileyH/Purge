@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Purge\Factory;
+namespace Katten\Purge\Factory;
 
 
 abstract class Factory {

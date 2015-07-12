@@ -2,10 +2,10 @@
 
 
 
-namespace Purge\Factory;
+namespace Katten\Purge\Factory;
 
 
-use Purge\BlockHashTable;
+use Katten\Purge\BlockHashTable;
 use Sabberworm\CSS\CSSList\Document;
 
 

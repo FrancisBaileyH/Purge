@@ -2,12 +2,12 @@
 
 
 
-namespace Purge\Controllers;
+namespace Katten\Purge\Controllers;
 
 
-use Purge\Purger;
-use Purge\Factory\DomFactory;
-use Purge\Factory\BlockHashTableFactory;
+use Katten\Purge\Purger;
+use Katten\Purge\Factory\DomFactory;
+use Katten\Purge\Factory\BlockHashTableFactory;
 use Sabberworm\CSS\CSSList\Document;
 use Symfony\Component\Console\Output\OutputInterface;
 

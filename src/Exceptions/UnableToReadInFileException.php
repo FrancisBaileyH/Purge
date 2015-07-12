@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Purge\Exceptions;
+namespace Katten\Purge\Exceptions;
 
 
 

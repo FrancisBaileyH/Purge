@@ -2,9 +2,9 @@
 
 
 
-use Purge\Purger;
-use Purge\PurgeHtmlCrawler;
-use Purge\Factory\BlockHashTableFactory;
+use Katten\Purge\Purger;
+use Katten\Purge\PurgeHtmlCrawler;
+use Katten\Purge\Factory\BlockHashTableFactory;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\Ruleset\DeclarationBlock;

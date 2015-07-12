@@ -2,10 +2,10 @@
 
 
 
-namespace Purge\Factory;
+namespace Katten\Purge\Factory;
 
 
-use Purge\Exceptions\UnableToReadInFileException;
+use Katten\Purge\Exceptions\UnableToReadInFileException;
 
 
 

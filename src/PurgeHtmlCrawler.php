@@ -2,7 +2,7 @@
 
 
 
-namespace Purge;
+namespace Katten\Purge;
 
 
 

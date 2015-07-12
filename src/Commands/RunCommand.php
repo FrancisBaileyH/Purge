@@ -2,12 +2,12 @@
 
 
 
-namespace Purge\Commands;
+namespace Katten\Purge\Commands;
 
 
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Settings;
-use Purge\Controllers\AppController;
+use Katten\Purge\Controllers\AppController;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

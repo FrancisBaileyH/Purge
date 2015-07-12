@@ -2,16 +2,15 @@
 
 
 
-namespace Purge\Factory;
+namespace Katten\Purge\Factory;
 
 
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Settings;
-use Purge\Exceptions\UnableToReadInFileException;
+use Katten\Purge\Exceptions\UnableToReadInFileException;
 
 
 class CssDocumentFactory extends FileFactory {
-
 
 
 	/**
@@ -38,8 +37,6 @@ class CssDocumentFactory extends FileFactory {
 		
 		return $parser->parse();
 	}
-
-
 
 
 }

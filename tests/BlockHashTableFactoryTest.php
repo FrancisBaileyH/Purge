@@ -1,7 +1,7 @@
 <?php
 
 
-use Purge\Factory\BlockHashTableFactory;
+use Katten\Purge\Factory\BlockHashTableFactory;
 use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\Parser;
 

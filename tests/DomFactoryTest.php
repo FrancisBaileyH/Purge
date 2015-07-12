@@ -3,8 +3,8 @@
 
 
 
-use Purge\Factory\DomFactory;
-use Purge\Exceptions\UnableToReadInFileException;
+use Katten\Purge\Factory\DomFactory;
+use Katten\Purge\Exceptions\UnableToReadInFileException;
 
 
 

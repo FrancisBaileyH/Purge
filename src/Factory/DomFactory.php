@@ -2,11 +2,11 @@
 
 
 
-namespace Purge\Factory;
+namespace Katten\Purge\Factory;
 
 
-use Purge\PurgeHtmlCrawler;
-use Purge\Exceptions\UnableToReadInFileException;
+use Katten\Purge\PurgeHtmlCrawler;
+use Katten\Purge\Exceptions\UnableToReadInFileException;
 
 
 class DomFactory extends FileFactory {

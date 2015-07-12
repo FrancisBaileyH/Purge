@@ -27,7 +27,6 @@ For a list of other commands run
 php purge.php purge:run --help
 ```
 
-*Commands are subject to change as Purge is intended to support reading from multiple CSS and HTML files.*
 
 
 ##To-Do
@@ -41,8 +40,8 @@ php purge.php purge:run --help
 
 ##Resources
 
-Thanks to @sabberworm for the wonder PHP CSS Parsing library
-Thanks to @symfony for their Console components
+- Thanks to [sabberworm](https://github.com/sabberworm/) for the wonderful PHP CSS Parsing library
+- Thanks to [symfony](https://github.com/symfony) for their Console, DomCrawler and CssSelector components
 
 
 ##Misc

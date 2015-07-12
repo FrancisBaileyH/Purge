@@ -7,8 +7,11 @@ A command line application to find and flag potentially unused CSS from your sit
 
 ###Installation
 
-Download Purge and extract to a location of your choosing. (installation via Composer coming soon)
+Download Purge and extract to a location of your choosing. Navigate into Purge's root directory and run
 
+```
+composer install 
+```
 
 ###Running Purge
 
@@ -24,7 +27,7 @@ For a list of other commands run
 php purge.php purge:run --help
 ```
 
-*Commands are subject to change as Purge is intended to support reading from multiple CSS and HTML files.
+*Commands are subject to change as Purge is intended to support reading from multiple CSS and HTML files.*
 
 
 ##To-Do

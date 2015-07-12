@@ -7,7 +7,7 @@ A command line application to find and flag potentially unused CSS from your sit
 
 ###Installation
 
-Download Purge and extract to a location of your choosing.
+Download Purge and extract to a location of your choosing. (installation via Composer coming soon)
 
 
 ###Running Purge

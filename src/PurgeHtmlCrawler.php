@@ -8,6 +8,7 @@ namespace Katten\Purge;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
+use Symfony\Component\CssSelector\Exception\ParseException;
 
 
 
@@ -27,14 +28,17 @@ class PurgeHtmlCrawler extends Crawler {
 	 */ 
 	public function findFirstInstance($selector) {
 
+		try {
 	
-		$xPath = CssSelector::toXPath($selector);
+			$xPath = CssSelector::toXPath($selector);
+			$xPath = '(' . $xPath . ')[1]';
 		
-		$xPath = '(' . $xPath . ')[1]';
-		
-		return $this->filterXPath($xPath);
+			return $this->filterXPath($xPath);
+		}
+		catch (ParseException $e) {
+			
+			throw new ParseException("{$e->getMessage()} Invalid Selector: $selector");
+		}
 	}
-
-
 
 }

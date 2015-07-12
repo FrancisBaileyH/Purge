@@ -32,7 +32,6 @@ class Purger {
      * Compares the CSS selectors against those found in the Crawler object
      * 
      * @param PurgeHtmlCrawler $dom
-     * 		A preloaded Crawler object
      */ 
     public function purge(PurgeHtmlCrawler $dom) {
         
@@ -77,7 +76,6 @@ class Purger {
      * Filter out any used CSS on a selector by selector basis
      * 
      * @param DeclarationBlock $block
-     *      The css block to check against existence in the dom
      * 
      * @return mixed
      *      Return the DeclarationBlock if no usage is found
@@ -91,16 +89,7 @@ class Purger {
             
             $processedSelector = $this->preprocess($selector->getSelector());
             
-            try {
-            
             $usage = $dom->findFirstInstance($processedSelector);
-            
-		}
-		catch ( \Exception $e) {
-			
-			echo $processedSelector;
-			throw $e;
-		}
 
             if (count($usage) > 0) {
                 return null;
@@ -116,7 +105,6 @@ class Purger {
      * Strip any pseudo classes out of the selector 
      * 
      * @param string $selector
-     *      A string representation of a css selectorf
      * 
      * @return string
      *      A processed selector string
@@ -124,7 +112,7 @@ class Purger {
     public function preprocess($selector) {
 
         if (strstr($selector, ':')) {
-            $processedSelector = preg_replace('/::?[^ ,:.]+/i', '', $selector);
+            $processedSelector = preg_replace('/\([^()]+\)|::?[^ ,:.(]+/i', '', $selector);
         }
         else {
             $processedSelector = $selector;

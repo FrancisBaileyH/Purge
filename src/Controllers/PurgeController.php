@@ -37,6 +37,12 @@ class PurgeController {
 	
 
 
+	/**
+	 * Loop through available HTML files and run
+	 * purge against them
+	 * 
+	 * @param array $html
+	 */ 
 	public function startPurge(array $html) {
 		
 		$i = 1;

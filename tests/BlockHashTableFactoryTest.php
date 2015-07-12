@@ -19,7 +19,7 @@ class BlockHashTableFactoryTest extends PHPUnit_Framework_TestCase {
 		
 		$hashTable = BlockHashTableFactory::build($document);
 		
-		$class = 'Purge\BlockHashTable';
+		$class = 'Katten\Purge\BlockHashTable';
 		
 		$this->assertTrue($hashTable instanceof $class);
 	}

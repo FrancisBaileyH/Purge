@@ -13,20 +13,12 @@ class DomFactoryTest extends PHPUnit_Framework_TestCase {
 	
 	
 	/**
-	 * Test that loading a non-existant file results
-	 * in an exception being thrown
+	 * @expectedException Katten\Purge\Exceptions\UnableToReadInFileException
 	 */ 
 	public function testDomFactoryExceptionThrown() {
-
-		try {
-		
-			$dom = DomFactory::build('foo');
+	
+		$dom = DomFactory::build('foo');
 			
-			$this->fail();
-		}
-		catch (UnableToReadInFileException $e) {
-			
-		}
 	}
 	
 	

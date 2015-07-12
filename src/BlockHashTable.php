@@ -34,7 +34,6 @@ class BlockHashTable {
 	 * a given Document object
 	 * 
 	 * @param Document $css
-	 * 		A parsed css document
 	 * 
 	 * @return mixed
 	 * 		A hash table containing css declartion blocks
@@ -58,12 +57,12 @@ class BlockHashTable {
 	 * Serialize the contents of the Declaration block and hash the result
 	 * 
 	 * @param DeclarationBlock $block
-	 * 		A css declaration block 
 	 * 
 	 * @return string
 	 * 		An md5 hash representing the DeclarationBlock object
 	 */
 	public function hashBlock(DeclarationBlock $block) {
+		
 		return md5(serialize($block));
 	}
 	
@@ -149,7 +148,6 @@ class BlockHashTable {
 	 * Determine if a block is in the hash table
 	 * 
 	 * @param DeclarationBlock $block
-	 * 		A declaration block to search for
 	 * 
 	 * @return bool
 	 * 		True if block is found

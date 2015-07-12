@@ -36,14 +36,14 @@ class Purger {
     public function purge(PurgeHtmlCrawler $dom) {
         
         foreach ($this->cssBlocks->getBlockCollection() as $block) {
-			
-			$decBlock = $block[BlockHashTable::BLOCK_VALUE];
+            
+            $decBlock = $block[BlockHashTable::BLOCK_VALUE];
             
             $unusedBlock = $this->filter($decBlock, $dom);
             
             if ($unusedBlock == null) {
-				$hash = $this->cssBlocks->hashBlock($decBlock);
-				$this->cssBlocks->setUsedFlag($hash, true);
+                $hash = $this->cssBlocks->hashBlock($decBlock);
+                $this->cssBlocks->setUsedFlag($hash, true);
             }
         }
     }
@@ -54,21 +54,21 @@ class Purger {
      * Get all unused css from the cssBlocks hashtable
      * 
      * @return
-     * 		An array of DeclarationBlock objects
+     *      An array of DeclarationBlock objects
      */ 
     public function getPurgedCss() {
-		
-		$unusedCss = [];
-		
-		foreach ($this->cssBlocks->getBlockCollection() as $block) {
-			
-			if (!$block[BlockHashTable::IS_USED]) {
-				$unusedCss[] = $block[BlockHashTable::BLOCK_VALUE];
-			}
-		}
-		
-		return $unusedCss;
-	}
+        
+        $unusedCss = [];
+        
+        foreach ($this->cssBlocks->getBlockCollection() as $block) {
+            
+            if (!$block[BlockHashTable::IS_USED]) {
+                $unusedCss[] = $block[BlockHashTable::BLOCK_VALUE];
+            }
+        }
+        
+        return $unusedCss;
+    }
     
        
     

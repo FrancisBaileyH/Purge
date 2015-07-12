@@ -12,23 +12,23 @@ use Sabberworm\CSS\Ruleset\DeclarationBlock;
 
 
 class PurgeTest extends PHPUnit_Framework_TestCase {
-	
-	
-	protected $dom;
-	protected $html;
-	
-		
-	
-	protected function setUp() {
-		
-		$this->html = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
-		$this->dom  = new PurgeHtmlCrawler($this->html);
-	}
-	
+    
+    
+    protected $dom;
+    protected $html;
+    
+        
+    
+    protected function setUp() {
+        
+        $this->html = "<div class='test'><div class='all'><p class='text-center'>Text Here</p></div></div>";
+        $this->dom  = new PurgeHtmlCrawler($this->html);
+    }
+    
 
-	/**
-	 * Perform a basic test to see if filtering works
-	 */ 
+    /**
+     * Perform a basic test to see if filtering works
+     */ 
     public function testFilterSelector() {
                
         $css      = ".test { position: absolute; } .unused { }";
@@ -40,7 +40,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         
         $purge->purge($this->dom);             
        
-		$this->assertNotNull($purge->getPurgedCss());
+        $this->assertNotNull($purge->getPurgedCss());
     }
     
     
@@ -96,14 +96,14 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
     
     
     
-  	/**
-	 * Test that newly parsed html does not overwrite css that is found
-	 * to be used in previous html files. 
-	 */ 
+    /**
+     * Test that newly parsed html does not overwrite css that is found
+     * to be used in previous html files. 
+     */ 
     public function testUsedCssRemoved() {
-		
-		$htmlA = "<div>Text Here</div>";
-		$htmlB = "<div class='test'><p class='text-center'>Text Here</p></div>";
+        
+        $htmlA = "<div>Text Here</div>";
+        $htmlB = "<div class='test'><p class='text-center'>Text Here</p></div>";
         $css   = ".test { position: absolute; }";
         
        
@@ -127,7 +127,7 @@ class PurgeTest extends PHPUnit_Framework_TestCase {
         $purgedCss = $purge->getPurgedCss();
         
         $this->assertEmpty($purgedCss);
-		
-	}
+        
+    }
     
 }

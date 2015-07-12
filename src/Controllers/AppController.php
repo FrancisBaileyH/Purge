@@ -38,24 +38,24 @@ class AppController {
      * Start up the PurgeManager and output the summary
      */ 
     public function run() {
-		
-		try {
-			$this->setUp();
-			
-			$purgeManager = new PurgeController($this->css, $this->output);
-			$purgeManager->startPurge($this->html);
-			
-			$this->outputSummary($purgeManager->getPurgeResults());
-		} 
-		catch ( \Exception $e ) {
-			
-			$type = get_class($e);
-			$this->output->writeln('');
-			$this->output->writeln("<error> {$type} </error>");
-			$this->output->writeln("<error> {$e->getMessage()} </error> \n");
-		}
-		
-		$this->output->writeln(''); 
+        
+        try {
+            $this->setUp();
+            
+            $purgeManager = new PurgeController($this->css, $this->output);
+            $purgeManager->startPurge($this->html);
+            
+            $this->outputSummary($purgeManager->getPurgeResults());
+        } 
+        catch ( \Exception $e ) {
+            
+            $type = get_class($e);
+            $this->output->writeln('');
+            $this->output->writeln("<error> {$type} </error>");
+            $this->output->writeln("<error> {$e->getMessage()} </error> \n");
+        }
+        
+        $this->output->writeln(''); 
     }
     
     
@@ -68,19 +68,19 @@ class AppController {
      * occurs
      */ 
     public function setUp() {
-		
-		$this->output->writeln('');
+        
+        $this->output->writeln('');
         $this->output->write('Reading in CSS');
-		
-		$cssFile   = $this->input->getArgument('css');
-		$mbSupport = $this->input->getOption('mb-support');
-		
-		$this->css = CssDocumentFactory::build($cssFile, $mbSupport);
-		
-		$this->output->writeln(' [<info>OK</info>]'); 
-		
-		$this->html = [ $this->input->getArgument('html') ];
-	}
+        
+        $cssFile   = $this->input->getArgument('css');
+        $mbSupport = $this->input->getOption('mb-support');
+        
+        $this->css = CssDocumentFactory::build($cssFile, $mbSupport);
+        
+        $this->output->writeln(' [<info>OK</info>]'); 
+        
+        $this->html = [ $this->input->getArgument('html') ];
+    }
     
     
       
@@ -106,10 +106,10 @@ class AppController {
         $result = @file_put_contents($file, $output);   
         
         if (!$result) {
-			throw new \Exception("Error unable to write to file: $file");
-		} 
-		
-		$this->output->writeln(' [<info>OK</info>]');   
+            throw new \Exception("Error unable to write to file: $file");
+        } 
+        
+        $this->output->writeln(' [<info>OK</info>]');   
     }
     
 }

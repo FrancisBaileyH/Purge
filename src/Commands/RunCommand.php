@@ -43,16 +43,16 @@ class RunCommand extends Command {
                 'Specify an html file to check against'
             )
             ->addArgument(
-				'output-file',
-				InputArgument::REQUIRED,
-				'Specify a file to write the output to'
-			)
+                'output-file',
+                InputArgument::REQUIRED,
+                'Specify a file to write the output to'
+            )
             ->addOption(
-				'sitemap',
-				null,
-				InputOption::VALUE_NONE,
-				'If set, Purge will read in a sitemap file and run against the links found within it'
-			);
+                'sitemap',
+                null,
+                InputOption::VALUE_NONE,
+                'If set, Purge will read in a sitemap file and run against the links found within it'
+            );
     }
     
     

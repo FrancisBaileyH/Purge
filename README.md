@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/FrancisBaileyH/Purge.svg?branch=master)](https://travis-ci.org/FrancisBaileyH/Purge/)
+
 #Purge
 
 A command line application to find and flag potentially unused CSS from your site. (Currently a work in progress). 

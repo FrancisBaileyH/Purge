@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/FrancisBaileyH/Purge.svg?branch=master)](https://travis-ci.org/FrancisBaileyH/Purge/)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/badges/build.png?b=master)](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/build-status/master) 
 
 #Purge
 

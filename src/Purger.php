@@ -82,9 +82,7 @@ class Purger {
      *      otherwise, return null
      */ 
     public function filter(DeclarationBlock $block, PurgeHtmlCrawler $dom) {
-        
-        $usage = 0;
-        
+              
         foreach ($block->getSelectors() as $selector) {
             
             $processedSelector = $this->preprocess($selector->getSelector());

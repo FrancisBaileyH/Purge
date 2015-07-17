@@ -29,7 +29,6 @@ class CssDocumentFactory extends FileFactory {
         $css = parent::buildFromFile($file);
         
         $settings = Settings::create()->withMultibyteSupport($mbSupport);
-        $settings = $settings->beStrict();
                 
         $parser = new Parser($css, $settings);
         

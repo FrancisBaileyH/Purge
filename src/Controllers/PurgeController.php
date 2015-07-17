@@ -15,11 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 
 class PurgeController {
-
-
-
-    private $purgedCSS = [];
-    
+  
     
     private $output;
     

@@ -25,7 +25,7 @@ class BlockHashTable {
     
     public function __construct() {
     
-        $hashTable = [];
+        $this->hashTable = [];
     }
     
     

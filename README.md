@@ -2,14 +2,14 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/badges/build.png?b=master)](https://scrutinizer-ci.com/g/FrancisBaileyH/Purge/build-status/master) 
 
-#Purge
+# Purge
 
 A command line application to find and flag potentially unused CSS from your site. (Currently a work in progress). 
 
 
-##Usage
+## Usage
 
-###Installation
+### Installation
 
 Download Purge and extract to a location of your choosing. Navigate into Purge's root directory and run
 
@@ -17,7 +17,7 @@ Download Purge and extract to a location of your choosing. Navigate into Purge's
 composer install 
 ```
 
-###Running Purge
+### Running Purge
 
 Change into the src directory of Purge and run it with the following command
 
@@ -33,7 +33,7 @@ php purge.php purge:run --help
 
 
 
-##To-Do
+## To-Do
 
 - [ ] Support usage of sitemap.xml for HTML files
 - [ ] Support multiple CSS and HTML files
@@ -42,20 +42,20 @@ php purge.php purge:run --help
 - [ ] Ability to ignore specificed CSS selectors
 
 
-##Resources
+## Resources
 
 - Thanks to [sabberworm](https://github.com/sabberworm/) for the wonderful PHP CSS Parsing library
 - Thanks to [symfony](https://github.com/symfony) for their Console, DomCrawler and CssSelector components
 
 
-##Misc
+## Misc
 
 To run unit tests, ensure phpunit is installed and navigate to the root directory of Purge. Run the following command:
 ``` bash
 phpunit --bootstrap vendor/autoload.php tests/
 ```
 
-##License
+## License
 
 The MIT License (MIT)
 
